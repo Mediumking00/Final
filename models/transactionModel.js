@@ -5,8 +5,8 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  amount: {
-    type: Number,
+  post: {
+    type: String,
     required: true
   },
   created: {

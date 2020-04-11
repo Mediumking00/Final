@@ -27,7 +27,7 @@ const auth = require('../middleware/auth')
 
 router.post('/users', async (req,res) => {
   try {
-    const user = new User(req.body)
+  const user = new User(req.body)
 
     //triggerd ".pre" middleware
     await user.save()
@@ -38,6 +38,7 @@ router.post('/users', async (req,res) => {
     res.status(400).json({error: error.message})
   }
 })
+
 
 router.post('/users/login', async (req,res) => {
   try {
@@ -110,7 +111,7 @@ router.get('/transactions/:id', async (req,res,next) => {
 })
 
 router.post('/transactions', async (req,res) => {
-  const t = new Transaction(req.body) // { name: 'something', amount: 1000 }
+  const t = new Transaction(req.body) // { name: 'something', post: 1000 }
 
   try {
     await t.save()
@@ -123,7 +124,7 @@ router.post('/transactions', async (req,res) => {
 router.put('/transactions/:id', async (req,res) => {
   const update_t = {
     name: req.body.name,
-    amount: Number(req.body.amount),
+    post: Number(req.body.post),
     updated: new Date()
   }
   try {
