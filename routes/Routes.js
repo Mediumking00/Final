@@ -4,6 +4,7 @@ const router = express.Router()
 // import models
 const Transaction = require('../models/transactionModel')
 const User = require('../models/userModel')
+const Company =require('../models/companyModel')
 
 // MongoDB Atlas connection setting
 const mongoose = require('mongoose')
@@ -25,18 +26,38 @@ const auth = require('../middleware/auth')
 
 /********************* User Endpoints ******************/
 
-router.post('/users', async (req,res) => {
-  try {
-  const user = new User(req.body)
+router.post('/users', function(req,res) {
+  // try {
+  // const user = new User(req.body)
 
-    //triggerd ".pre" middleware
-    await user.save()
-    const token = await user.generateAuthToken()
+  //   //triggerd ".pre" middleware
+  //   await user.save()
+  //   const token = await user.generateAuthToken()
 
-    res.status(201).json({msg: 'add user successful', user, token})
-  }catch (error){
-    res.status(400).json({error: error.message})
-  }
+  //   res.status(201).json({msg: 'add user successful', user, token})
+  // }catch (error){
+  //   res.status(400).json({error: error.message})
+  // }
+  var username = req.body.username;
+  var password = req.body.password;
+  var firstname = req.body.firstname;
+  var lastname = req.body.lastname;
+  var email = req.body.email;
+  
+  var newuser = new User();
+  newuser.username = username;
+  newuser.password = password;
+  newuser.firstname = firstname;
+  newuser.lastname = lastname;
+  newuser.email = email;
+
+  newuser.save(function(err, savedUser){
+    if(err){
+      return res.status(500).send();
+    }
+    return res.status(200).send();
+  })
+
 })
 
 

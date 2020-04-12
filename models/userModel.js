@@ -5,11 +5,14 @@ const jwt = require('jsonwebtoken')
  
 
 const userSchema = new mongoose.Schema({
+    name:{
+        type: String
+    },
     email:{
         type: String,
         required: true,
         unique: true,
-        lowercase: true,
+        trim: true
         // validator: (value) => {
         //     if (!validator.isEmail(value)) {
         //         throw new Error({ error: 'Invalid email address'})
@@ -20,6 +23,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 6, //hashed password
+        trim: true
     },
 })
 

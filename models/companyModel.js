@@ -22,7 +22,9 @@ const companydetailSchema = new mongoose.Schema({
         startWork:String,
         endWork:String
     },
-    role: {},
+    role: {
+        type: String
+    },
     gender: {
         type: String,
         enum: ["male", "female"]
